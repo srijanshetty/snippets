@@ -1,0 +1,14 @@
+function _tool-f() {
+    cat cfg/*.cfg | grep '\[' | tr -d '[]' | sort -u | fzf --ansi --multi --tac --preview-window right:70%
+}
+
+function bind-tool-helper() {
+    local c
+    for c in $@; do
+        eval "fzf-tool-$c-widget() { local result=\$(_tool-$c | tr -s '\n ' ',' | sed 's/,$//'); zle reset-prompt; LBUFFER+=\$result }"
+        eval "zle -N fzf-fm-$c-widget"
+        eval "bindkey '^f^$c' fzf-fm-$c-widget"
+    done
+}
+bind-tool-helper f
+unset -f bind-tool-helper
