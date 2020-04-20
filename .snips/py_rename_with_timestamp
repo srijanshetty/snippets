@@ -1,0 +1,6 @@
+def rename_with_timestamp(old_name, new_name):
+    # Preserve creation and modification times
+    print(old_name, new_name)
+    stat = os.stat(old_name)
+    os.rename(old_name, new_name)
+    os.utime(new_name, (stat.st_atime, stat.st_mtime))
