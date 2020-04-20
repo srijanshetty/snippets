@@ -1,0 +1,9 @@
+*
+!.gitignore.d/
+!.gitignore.d/snippets
+!.LICENSES.d/
+!.LICENSES.d/snippets
+!.README.d/
+!.README.d/snippets
+!.snips/
+!.snips/*
