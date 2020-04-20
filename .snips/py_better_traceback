@@ -1,0 +1,41 @@
+import contextlib
+import io
+import sys
+
+def format_exc() -> str:
+    '''
+    Print the usual traceback information, followed by a listing of all the
+    local variables in each frame.
+    '''
+
+    def stack_(frame):
+        framelist = []
+        while frame:
+            framelist.append(frame)
+            frame = frame.f_back
+        return framelist
+
+    # pylint: disable=protected-access
+    stack = stack_(sys._getframe(1))
+    stack.reverse()
+
+    f = io.StringIO()
+    with contextlib.redirect_stderr(f):
+        traceback.print_exc()
+        print('\nLocals by frame, innermost last')
+        for frame in stack:
+            print('Frame {} in {} at line {}'.format(frame.f_code.co_name,
+                                                     frame.f_code.co_filename,
+                                                     frame.f_lineno))
+            for key, value in frame.f_locals.items():
+                # We have to be VERY careful not to cause a new error in our error
+                # printer! Calling str(  ) on an unknown object could cause an
+                # error we don't want, so we must use try/except to catch it --
+                # we can't stop it from happening, but we can and should
+                # stop it from propagating if it does happen!
+                try:
+                    print('\t{:20} = {}'.format(key, value))
+                except TypeError:
+                    print('<ERROR WHILE PRINTING VALUE>')
+
+    return f.getvalue()
