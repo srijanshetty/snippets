@@ -1,0 +1,48 @@
+[[snippets]]
+  description = "Encrypt a tar archive"
+  command = "openssl aes-256-cbc -in <in=keys>.tar.gz -out <out=keys>.tar.gz.enc -a -md sha512 -pbkdf2 -iter 1000 -salt --base64"
+  output = ""
+
+[[snippets]]
+  description = "Decrypt a tar archive"
+  command = "openssl aes-256-cbc -d -in <in=keys>.tar.gz.enc -out <out=keys>.tar.gz -a -md sha512 -pbkdf2 -iter 1000 -salt --base64"
+  output = ""
+
+[[snippets]]
+  description = "create openssl certificate"
+  command = "openssl req -newkey rsa:4096 -nodes -keyout <key=key>.pem -x509 -days 365 -out <cert=certificate>.pem"
+  output = ""
+
+[[snippets]]
+  description = "Increase filewatchers by settings fs.inotify in sysctl"
+  command = "echo fs.inotify.max_user_watches=<count=524288> | sudo tee -a /etc/sysctl.conf && sudo sysctl -p"
+  output = ""
+
+[[snippets]]
+  description = "spin up a redis instance on docker/podman"
+  command = "podman run -d -p 6379:6379 --name redisdb redis"
+  output = ""
+
+[[snippets]]
+  description = "spin up a mongodb instance on docker/podman"
+  command = "podman run -d -p 27017-27019:27017-27019 --name mongodb mongo"
+  output = ""
+
+[[snippets]]
+  description = "kill a batch of similar jobs"
+  command = "$ ps auxf | grep <regex> | awk '{ print $2 }' | xargs kill -9"
+  output = ""
+
+[[snippets]]
+  description = "logging to gcloud docker registry"
+  command = "gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://gcr.io"
+  output = ""
+
+[[snippets]]
+  description = "Get wifi passwords"
+  command = "sudo grep -r '^psk=' /etc/NetworkManager/system-connections/"
+  output = ""
+
+[[snippets]]
+  description = "Create a gcloud ubuntu box"
+  command = "gcloud compute instances create <name> --zone=<zone> machine-type=<machine=n1-standard-1> --image=ubuntu-1804-bionic-v20200218 --image-project=ubuntu-os-cloud"
