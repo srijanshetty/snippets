@@ -46,3 +46,9 @@
 [[snippets]]
   description = "Create a gcloud ubuntu box"
   command = "gcloud compute instances create <name> --zone=<zone> machine-type=<machine=n1-standard-1> --image=ubuntu-1804-bionic-v20200218 --image-project=ubuntu-os-cloud"
+  output = ""
+
+[[snippets]]
+  description = "delete all git tags"
+  command = "for tag in $(git tag); do git tag -d $tag; done"
+  output = ""
