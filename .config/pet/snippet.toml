@@ -52,3 +52,8 @@
   description = "delete all git tags"
   command = "for tag in $(git tag); do git tag -d $tag; done"
   output = ""
+
+[[snippets]]
+  description = "export gpg key"
+  command = "gpg --output ~/gpg.key --armor --export <in=keyname>"
+  output = ""
