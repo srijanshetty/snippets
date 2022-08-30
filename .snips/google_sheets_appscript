@@ -1,0 +1,35 @@
+---
+tags: [google, sheets, js]
+language: js
+---
+
+// Get all the required prices
+function getPrices() {
+  // Get the sheet and the entire data range of the sheet
+  const sheet = SpreadsheetApp.getActive().getSheetByName('SYMBOL');
+  const values = sheet.getDataRange().getValues();
+
+  // iterate thorough rows 2 to infinity, and append the price
+  for (let i = 2; i < values.length; ++i) {
+    const coinId = values[i][3];
+    const price = getPrice(coinId).price;
+
+    // Populate the 5th column with the price
+    sheet.getRange(i + 1, 5).setValue(price);
+  }
+}
+
+// Fetch the price from wagmi.bio
+function getPrice(id) {
+  var response = UrlFetchApp.fetch(`https://url/${id}`);
+  
+  //Logger.log(response.getContentText());
+  if (response.getResponseCode() == 200) {
+    var params = JSON.parse(response.getContentText());
+    Logger.log(params);
+    return params;
+  } else {
+   Logger.log("Error from getUid()")
+   return "error"
+  }
+}
