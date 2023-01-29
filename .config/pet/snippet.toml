@@ -1,11 +1,11 @@
 [[snippets]]
   description = "Encrypt a tar archive"
-  command = "openssl aes-256-cbc -in <in=keys>.tar.gz -out <out=keys>.tar.gz.enc -a -md sha512 -pbkdf2 -iter 1000 -salt --base64"
+  command = "openssl aes-256-cbc -in <in=keys>.tar.gz -out <out=keys>.tar.gz.enc -a -md sha512 -pbkdf2 -iter 1000 -salt -base64"
   output = ""
 
 [[snippets]]
   description = "Decrypt a tar archive"
-  command = "openssl aes-256-cbc -d -in <in=keys>.tar.gz.enc -out <out=keys>.tar.gz -a -md sha512 -pbkdf2 -iter 1000 -salt --base64"
+  command = "openssl aes-256-cbc -d -in <in=keys>.tar.gz.enc -out <out=keys>.tar.gz -a -md sha512 -pbkdf2 -iter 1000 -salt -base64"
   output = ""
 
 [[snippets]]
